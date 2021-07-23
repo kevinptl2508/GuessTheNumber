@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guess The Number!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Asap&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container" id="container1">
+        <h1>Guess The Number!</h1>
+        <p id="para">There's a random number selected by computer in between 1 to 100. You'll have 10 chances to guess
+            the correct number. So what are you waiting for! START GUESSING...</p>
+
+        <input type="text" placeholder="Guess here" class="textField"><br>
+        <button class="btn">Check</button>
+        <div class="resultParas">
+            <p class="guesses"></p>
+            <p class="lastResult"></p>
+            <p class="lowOrHi"></p>
+            <div id="reset"></div>
+        </div>
+    </div>
+
+
+    <script>
+        let randomNumber = Math.ceil(1 + (100 - 1) * Math.random());
+        console.log(randomNumber);
+        let guesses = document.querySelector('.guesses');
+        let lastResult = document.querySelector('.lastResult');
+        let lowOrHi = document.querySelector('.lowOrHi');
+        let submit = document.querySelector('.btn');
+        let textField = document.querySelector('.textField');
+        let count = 1;
+        // let reset = '';
+
+        function checkGuess() {
+            let userGuess = Number(textField.value);
+            if (count === 1) {
+                guesses.textContent = 'Previous Guesses : ';
+            }
+            guesses.textContent += userGuess + ' ';
+            if (userGuess === randomNumber) {
+                lastResult.textContent = 'Congratulations! You got it right!';
+                container1.style.backgroundColor = 'rgb(0, 150, 0,0.5)';
+                container1.style.color = 'white';
+                lowOrHi.textContent = '';
+                setGameOver();
+            }
+            else if (count === 10) {
+                lastResult.textContent = '!!!GAME OVER!!!';
+                setGameOver();
+            }
+            else {
+                lastResult.textContent = 'Wrong!';
+                container1.style.backgroundColor = 'rgba(255,0,0,0.5)';
+                container1.style.color = 'white';
+                if (userGuess < randomNumber) {
+                    lowOrHi.textContent = 'Last guess was too low!';
+                }
+                else if (userGuess > randomNumber) {
+                    lowOrHi.textContent = 'Last guess was too high!';
+                }
+            }
+            count++;
+            textField.value = '';
+            textField.focus();
+        }
+
+        submit.addEventListener('click', checkGuess);
+
+        function setGameOver() {
+            submit.disabled = true;
+            textField.disabled = true;
+            // reset = document.createElement('button');
+            // reset.textContent = 'RESTART';
+            // document.body.append(reset);
+            reset.innerHTML = '<button class="btn">RESTART</button>';
+            reset.addEventListener('click', resetGame);
+        }
+
+        function resetGame() {
+            count = 1;
+
+            const resetPara = document.querySelectorAll('.resultParas p');
+            for (let i = 0; i < resetPara.length; i++) {
+                resetPara[i].textContent = '';
+            }
+
+            submit.disabled = false;
+            textField.disabled = false;
+            textField.value = '';
+            textField.focus();
+
+            container1.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+            container1.style.color = 'black';
+            reset.innerHTML = '';
+
+            let randomNumber = Math.ceil(1 + (100 - 1) * Math.random());
+        }
+    </script>
+</body>
+
+</html>

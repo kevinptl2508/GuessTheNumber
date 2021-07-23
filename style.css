@@ -1,0 +1,46 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    font-family: 'Asap', sans-serif;
+}
+body{
+    background: url('/GuessTheNumber/2.jpg') no-repeat center center/cover;
+}
+
+.container{
+    background-color: rgba(255, 255, 255, 0.7);
+    padding: 15px 0px;
+    text-align: center;
+    margin-top: 20px;
+    transition: all 0.5s linear;
+}
+.container h1{
+    font-family: 'Lobster', cursive;
+    padding: 10px;
+    font-size: 3.5rem;
+}
+.container p{
+    margin: 5px;
+    font-size: 1.1rem;
+}
+
+.container input{
+    margin-top: 24px;
+    height: 50px;
+    width: 250px;
+    text-align: center;
+    font-size: 1.2rem;
+    background-color: rgb(255, 231, 231);
+}
+.btn{
+    margin: 20px;
+    padding: 10px;
+    width: 100px;
+    text-align: center;
+    font-size: 1rem;
+    cursor: pointer;
+}
+/* .btn:hover{
+    background-color: rgb(199, 199, 199);
+} */
